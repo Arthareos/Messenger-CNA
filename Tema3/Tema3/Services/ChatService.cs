@@ -12,15 +12,16 @@ namespace Tema3
     public class ChatService : ChatServices.ChatServicesBase
     {
         private readonly ILogger<ChatService> _logger;
-        private ChatRoomService chatRoomService;
+        private ChatRoomService chatRoomService=new ChatRoomService();
         public ChatService(ILogger<ChatService> logger)
         {
             _logger = logger;
         }
-
-        public override async Task<JoinClientReply> JoinClientChat(JoinClientRequest request, ServerCallContext context)
+        
+        public override Task<JoinClientReply> JoinClientChat(JoinClientRequest request, ServerCallContext context)
         {
-            return new JoinClientReply { RoomId = await chatRoomService.AddClientToChatRoomAsync(request.ClientDetails) };
+            chatRoomService.AddClientToChatRoomAsync(request.ClientDetails);
+            return Task.FromResult(new JoinClientReply { });
         }
         public override async Task SendMessageInChat(Grpc.Core.IAsyncStreamReader<ChatMessage> requestStream,
             Grpc.Core.IServerStreamWriter<ChatMessage> responseStream, Grpc.Core.ServerCallContext context)

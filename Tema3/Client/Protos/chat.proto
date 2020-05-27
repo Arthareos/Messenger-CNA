@@ -21,7 +21,6 @@ message ChatMessage {
 	string client_name = 5;
 	string message = 2;
 	string color = 3;
-	int32 room_id = 4;
 }
 
 message JoinClientRequest {
@@ -29,5 +28,4 @@ message JoinClientRequest {
 }
 
 message JoinClientReply {
-	int32 room_id = 1;
 }

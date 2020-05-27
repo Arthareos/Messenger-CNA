@@ -7,16 +7,7 @@ namespace Server.Models
 {
     public class ChatRoom
     {
-        private int id;
         private List<Client> clientsInRoom;
-        public int Id
-        {
-            get
-            {
-                return id;
-            }
-
-        }
         public List<Client> ClientsInRoom
         {
             get
@@ -24,9 +15,8 @@ namespace Server.Models
                 return clientsInRoom;
             }
         }
-        public ChatRoom(int id)
+        public ChatRoom()
         {
-            this.id = id;
             clientsInRoom = new List<Client>();
         }
     }

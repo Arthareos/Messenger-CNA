@@ -13,6 +13,7 @@ namespace Client
             bool isValid = false;
             var channel = GrpcChannel.ForAddress("https://localhost:5001");
             var client = new ChatServices.ChatServicesClient(channel);
+
             Console.WriteLine("Introduceti Numele: ");
             string nume = Console.ReadLine();
             var clientDetails = new ClientDetails
@@ -21,10 +22,13 @@ namespace Client
                 Id = Guid.NewGuid().ToString(),
                 Name = args.Length > 0 ? args[0] : nume
             };
-            var joinClientReply = await client.JoinClientChatAsync(new JoinClientRequest
+            
+            var joinClientRequest = new JoinClientRequest
             {
                 ClientDetails = clientDetails
-            });
+            };
+            var joinClientReply = await client.JoinClientChatAsync(joinClientRequest);
+            
             using (var streaming = client.SendMessageInChat(new Metadata { new Metadata.Entry("CustomerName", clientDetails.Name) }))
             {
                 var response = Task.Run(async () =>
@@ -41,7 +45,6 @@ namespace Client
                     ClientId = clientDetails.Id,
                     Color = clientDetails.ColorInConsole,
                     Message = "",
-                    RoomId = joinClientReply.RoomId,
                     ClientName = clientDetails.Name
                 });
                 var line = Console.ReadLine();
@@ -53,7 +56,6 @@ namespace Client
                         ClientName = clientDetails.Name,
                         ClientId = clientDetails.Id,
                         Color = clientDetails.ColorInConsole,
-                        RoomId = joinClientReply.RoomId,
                         Message = line
                     };
                     await streaming.RequestStream.WriteAsync(messageDetails);

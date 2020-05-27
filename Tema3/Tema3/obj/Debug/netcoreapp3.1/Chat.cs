@@ -29,19 +29,19 @@ namespace Server {
             "AyABKAkiZgoLQ2hhdE1lc3NhZ2USEQoJY2xpZW50X2lkGAEgASgJEhMKC2Ns",
             "aWVudF9uYW1lGAUgASgJEg8KB21lc3NhZ2UYAiABKAkSDQoFY29sb3IYAyAB",
             "KAkSDwoHcm9vbV9pZBgEIAEoBSJAChFKb2luQ2xpZW50UmVxdWVzdBIrCg1j",
-            "bGllbnREZXRhaWxzGAEgASgLMhQuZ3JlZXQuQ2xpZW50RGV0YWlscyIiCg9K",
-            "b2luQ2xpZW50UmVwbHkSDwoHcm9vbV9pZBgBIAEoBTKTAQoMQ2hhdFNlcnZp",
-            "Y2VzEj8KEVNlbmRNZXNzYWdlSW5DaGF0EhIuZ3JlZXQuQ2hhdE1lc3NhZ2Ua",
-            "Ei5ncmVldC5DaGF0TWVzc2FnZSgBMAESQgoOSm9pbkNsaWVudENoYXQSGC5n",
-            "cmVldC5Kb2luQ2xpZW50UmVxdWVzdBoWLmdyZWV0LkpvaW5DbGllbnRSZXBs",
-            "eUIJqgIGU2VydmVyYgZwcm90bzM="));
+            "bGllbnREZXRhaWxzGAEgASgLMhQuZ3JlZXQuQ2xpZW50RGV0YWlscyIRCg9K",
+            "b2luQ2xpZW50UmVwbHkykwEKDENoYXRTZXJ2aWNlcxI/ChFTZW5kTWVzc2Fn",
+            "ZUluQ2hhdBISLmdyZWV0LkNoYXRNZXNzYWdlGhIuZ3JlZXQuQ2hhdE1lc3Nh",
+            "Z2UoATABEkIKDkpvaW5DbGllbnRDaGF0EhguZ3JlZXQuSm9pbkNsaWVudFJl",
+            "cXVlc3QaFi5ncmVldC5Kb2luQ2xpZW50UmVwbHlCCaoCBlNlcnZlcmIGcHJv",
+            "dG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Server.ClientDetails), global::Server.ClientDetails.Parser, new[]{ "Id", "Name", "ColorInConsole" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Server.ChatMessage), global::Server.ChatMessage.Parser, new[]{ "ClientId", "ClientName", "Message", "Color", "RoomId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Server.JoinClientRequest), global::Server.JoinClientRequest.Parser, new[]{ "ClientDetails" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Server.JoinClientReply), global::Server.JoinClientReply.Parser, new[]{ "RoomId" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Server.JoinClientReply), global::Server.JoinClientReply.Parser, null, null, null, null)
           }));
     }
     #endregion
@@ -634,24 +634,12 @@ namespace Server {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public JoinClientReply(JoinClientReply other) : this() {
-      roomId_ = other.roomId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public JoinClientReply Clone() {
       return new JoinClientReply(this);
-    }
-
-    /// <summary>Field number for the "room_id" field.</summary>
-    public const int RoomIdFieldNumber = 1;
-    private int roomId_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int RoomId {
-      get { return roomId_; }
-      set {
-        roomId_ = value;
-      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -667,14 +655,12 @@ namespace Server {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (RoomId != other.RoomId) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (RoomId != 0) hash ^= RoomId.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -688,10 +674,6 @@ namespace Server {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (RoomId != 0) {
-        output.WriteRawTag(8);
-        output.WriteInt32(RoomId);
-      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -700,9 +682,6 @@ namespace Server {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (RoomId != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(RoomId);
-      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -713,9 +692,6 @@ namespace Server {
     public void MergeFrom(JoinClientReply other) {
       if (other == null) {
         return;
-      }
-      if (other.RoomId != 0) {
-        RoomId = other.RoomId;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -728,10 +704,6 @@ namespace Server {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 8: {
-            RoomId = input.ReadInt32();
-            break;
-          }
         }
       }
     }

@@ -23,3 +23,4 @@ D:\CNA\Messenger-CNA\Tema3\Tema3\obj\Debug\netcoreapp3.1\Server.RazorTargetAssem
 D:\CNA\Messenger-CNA\Tema3\Tema3\obj\Debug\netcoreapp3.1\Server.csproj.CopyComplete
 D:\CNA\Messenger-CNA\Tema3\Tema3\obj\Debug\netcoreapp3.1\Server.dll
 D:\CNA\Messenger-CNA\Tema3\Tema3\obj\Debug\netcoreapp3.1\Server.pdb
+D:\CNA\Messenger-CNA\Tema3\Tema3\obj\Debug\netcoreapp3.1\Server.csprojAssemblyReference.cache

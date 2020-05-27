@@ -8,14 +8,13 @@ namespace Server.Models
 {
     public class Client
     {
-        private int clientId;
+        private Guid clientId;
         private string name;
         private string color;
         public IAsyncStreamWriter<ChatMessage> stream;
        
         public Client()
         {
-            clientId = 0;
             name = string.Empty;
             color = string.Empty;
         }
@@ -30,7 +29,7 @@ namespace Server.Models
                 this.stream = value;
             }
         }
-        public int ClientId
+        public Guid ClientId
         {
             get
             {
