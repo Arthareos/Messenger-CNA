@@ -5,29 +5,31 @@ using System.Threading.Tasks;
 using Grpc.Core;
 using Microsoft.Extensions.Logging;
 using Server;
+using Server.Services;
+
 namespace Tema3
 {
     public class ChatService : ChatServices.ChatServicesBase
     {
         private readonly ILogger<ChatService> _logger;
+        private ChatRoomService chatRoomService;
         public ChatService(ILogger<ChatService> logger)
         {
             _logger = logger;
         }
-        /*List<ChatMessage> addChatMessages(ChatMessage chatMessage)
-        {
 
-        }*/
+        public override async Task<JoinClientReply> JoinClientChat(JoinClientRequest request, ServerCallContext context)
+        {
+            return new JoinClientReply { RoomId = await chatRoomService.AddClientToChatRoomAsync(request.ClientDetails) };
+        }
         public override async Task SendMessageInChat(Grpc.Core.IAsyncStreamReader<ChatMessage> requestStream,
             Grpc.Core.IServerStreamWriter<ChatMessage> responseStream, Grpc.Core.ServerCallContext context)
         {
             while (await requestStream.MoveNext())
             {
-                //var note = requestStream.Current;
                 var chatMessage = requestStream.Current;
                 List<ChatMessage> prevMessages = new List<ChatMessage>();
                 prevMessages.Add(chatMessage);
-                /*List<ChatMessage> prevNotes = AddNoteForLocation(note.Location, note);*/
                 foreach (var message in prevMessages)
                 {
                     await responseStream.WriteAsync(chatMessage);

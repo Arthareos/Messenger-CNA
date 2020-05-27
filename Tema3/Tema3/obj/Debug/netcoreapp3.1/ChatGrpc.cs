@@ -13,6 +13,8 @@ namespace Server {
     static readonly string __ServiceName = "greet.ChatServices";
 
     static readonly grpc::Marshaller<global::Server.ChatMessage> __Marshaller_greet_ChatMessage = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Server.ChatMessage.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Server.JoinClientRequest> __Marshaller_greet_JoinClientRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Server.JoinClientRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Server.JoinClientReply> __Marshaller_greet_JoinClientReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Server.JoinClientReply.Parser.ParseFrom);
 
     static readonly grpc::Method<global::Server.ChatMessage, global::Server.ChatMessage> __Method_SendMessageInChat = new grpc::Method<global::Server.ChatMessage, global::Server.ChatMessage>(
         grpc::MethodType.DuplexStreaming,
@@ -20,6 +22,13 @@ namespace Server {
         "SendMessageInChat",
         __Marshaller_greet_ChatMessage,
         __Marshaller_greet_ChatMessage);
+
+    static readonly grpc::Method<global::Server.JoinClientRequest, global::Server.JoinClientReply> __Method_JoinClientChat = new grpc::Method<global::Server.JoinClientRequest, global::Server.JoinClientReply>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "JoinClientChat",
+        __Marshaller_greet_JoinClientRequest,
+        __Marshaller_greet_JoinClientReply);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -36,6 +45,11 @@ namespace Server {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
+      public virtual global::System.Threading.Tasks.Task<global::Server.JoinClientReply> JoinClientChat(global::Server.JoinClientRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
     }
 
     /// <summary>Creates service definition that can be registered with a server</summary>
@@ -43,7 +57,8 @@ namespace Server {
     public static grpc::ServerServiceDefinition BindService(ChatServicesBase serviceImpl)
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
-          .AddMethod(__Method_SendMessageInChat, serviceImpl.SendMessageInChat).Build();
+          .AddMethod(__Method_SendMessageInChat, serviceImpl.SendMessageInChat)
+          .AddMethod(__Method_JoinClientChat, serviceImpl.JoinClientChat).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
@@ -53,6 +68,7 @@ namespace Server {
     public static void BindService(grpc::ServiceBinderBase serviceBinder, ChatServicesBase serviceImpl)
     {
       serviceBinder.AddMethod(__Method_SendMessageInChat, serviceImpl == null ? null : new grpc::DuplexStreamingServerMethod<global::Server.ChatMessage, global::Server.ChatMessage>(serviceImpl.SendMessageInChat));
+      serviceBinder.AddMethod(__Method_JoinClientChat, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Server.JoinClientRequest, global::Server.JoinClientReply>(serviceImpl.JoinClientChat));
     }
 
   }

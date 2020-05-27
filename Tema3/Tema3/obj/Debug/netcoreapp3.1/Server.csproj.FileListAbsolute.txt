@@ -1,4 +1,3 @@
-D:\CNA\Messenger-CNA\Tema3\Tema3\obj\Debug\netcoreapp3.1\Server.csprojAssemblyReference.cache
 D:\CNA\Messenger-CNA\Tema3\Tema3\obj\Debug\netcoreapp3.1\staticwebassets\Server.StaticWebAssets.Manifest.cache
 D:\CNA\Messenger-CNA\Tema3\Tema3\obj\Debug\netcoreapp3.1\staticwebassets\Server.StaticWebAssets.xml
 D:\CNA\Messenger-CNA\Tema3\Tema3\obj\Debug\netcoreapp3.1\Server.MvcApplicationPartsAssemblyInfo.cache

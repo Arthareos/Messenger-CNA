@@ -13,6 +13,8 @@ namespace Server {
     static readonly string __ServiceName = "greet.ChatServices";
 
     static readonly grpc::Marshaller<global::Server.ChatMessage> __Marshaller_greet_ChatMessage = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Server.ChatMessage.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Server.JoinClientRequest> __Marshaller_greet_JoinClientRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Server.JoinClientRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Server.JoinClientReply> __Marshaller_greet_JoinClientReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Server.JoinClientReply.Parser.ParseFrom);
 
     static readonly grpc::Method<global::Server.ChatMessage, global::Server.ChatMessage> __Method_SendMessageInChat = new grpc::Method<global::Server.ChatMessage, global::Server.ChatMessage>(
         grpc::MethodType.DuplexStreaming,
@@ -20,6 +22,13 @@ namespace Server {
         "SendMessageInChat",
         __Marshaller_greet_ChatMessage,
         __Marshaller_greet_ChatMessage);
+
+    static readonly grpc::Method<global::Server.JoinClientRequest, global::Server.JoinClientReply> __Method_JoinClientChat = new grpc::Method<global::Server.JoinClientRequest, global::Server.JoinClientReply>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "JoinClientChat",
+        __Marshaller_greet_JoinClientRequest,
+        __Marshaller_greet_JoinClientReply);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -57,6 +66,22 @@ namespace Server {
       public virtual grpc::AsyncDuplexStreamingCall<global::Server.ChatMessage, global::Server.ChatMessage> SendMessageInChat(grpc::CallOptions options)
       {
         return CallInvoker.AsyncDuplexStreamingCall(__Method_SendMessageInChat, null, options);
+      }
+      public virtual global::Server.JoinClientReply JoinClientChat(global::Server.JoinClientRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return JoinClientChat(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::Server.JoinClientReply JoinClientChat(global::Server.JoinClientRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_JoinClientChat, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::Server.JoinClientReply> JoinClientChatAsync(global::Server.JoinClientRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return JoinClientChatAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::Server.JoinClientReply> JoinClientChatAsync(global::Server.JoinClientRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_JoinClientChat, null, options, request);
       }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override ChatServicesClient NewInstance(ClientBaseConfiguration configuration)
