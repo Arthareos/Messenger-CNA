@@ -7,16 +7,16 @@
 
 using grpc = global::Grpc.Core;
 
-namespace Tema3 {
+namespace Server {
   public static partial class Greeter
   {
     static readonly string __ServiceName = "greet.Greeter";
 
-    static readonly grpc::Marshaller<global::Tema3.HelloRequest> __Marshaller_greet_HelloRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Tema3.HelloRequest.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::Tema3.HelloReply> __Marshaller_greet_HelloReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Tema3.HelloReply.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Server.HelloRequest> __Marshaller_greet_HelloRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Server.HelloRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Server.HelloReply> __Marshaller_greet_HelloReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Server.HelloReply.Parser.ParseFrom);
 
-    static readonly grpc::Method<global::Tema3.HelloRequest, global::Tema3.HelloReply> __Method_SayHello = new grpc::Method<global::Tema3.HelloRequest, global::Tema3.HelloReply>(
-        grpc::MethodType.Unary,
+    static readonly grpc::Method<global::Server.HelloRequest, global::Server.HelloReply> __Method_SayHello = new grpc::Method<global::Server.HelloRequest, global::Server.HelloReply>(
+        grpc::MethodType.DuplexStreaming,
         __ServiceName,
         "SayHello",
         __Marshaller_greet_HelloRequest,
@@ -25,7 +25,7 @@ namespace Tema3 {
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
     {
-      get { return global::Tema3.GreetReflection.Descriptor.Services[0]; }
+      get { return global::Server.GreetReflection.Descriptor.Services[0]; }
     }
 
     /// <summary>Client for Greeter</summary>
@@ -51,21 +51,13 @@ namespace Tema3 {
       {
       }
 
-      public virtual global::Tema3.HelloReply SayHello(global::Tema3.HelloRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncDuplexStreamingCall<global::Server.HelloRequest, global::Server.HelloReply> SayHello(grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
-        return SayHello(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+        return SayHello(new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual global::Tema3.HelloReply SayHello(global::Tema3.HelloRequest request, grpc::CallOptions options)
+      public virtual grpc::AsyncDuplexStreamingCall<global::Server.HelloRequest, global::Server.HelloReply> SayHello(grpc::CallOptions options)
       {
-        return CallInvoker.BlockingUnaryCall(__Method_SayHello, null, options, request);
-      }
-      public virtual grpc::AsyncUnaryCall<global::Tema3.HelloReply> SayHelloAsync(global::Tema3.HelloRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
-      {
-        return SayHelloAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
-      }
-      public virtual grpc::AsyncUnaryCall<global::Tema3.HelloReply> SayHelloAsync(global::Tema3.HelloRequest request, grpc::CallOptions options)
-      {
-        return CallInvoker.AsyncUnaryCall(__Method_SayHello, null, options, request);
+        return CallInvoker.AsyncDuplexStreamingCall(__Method_SayHello, null, options);
       }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override GreeterClient NewInstance(ClientBaseConfiguration configuration)

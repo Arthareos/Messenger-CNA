@@ -635,9 +635,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\CNA\\Messenger-CNA\\Tema3\\Tema3\\Tema3.csproj",
-      "projectName": "Tema3",
-      "projectPath": "D:\\CNA\\Messenger-CNA\\Tema3\\Tema3\\Tema3.csproj",
+      "projectUniqueName": "D:\\CNA\\Messenger-CNA\\Tema3\\Tema3\\Server.csproj",
+      "projectName": "Server",
+      "projectPath": "D:\\CNA\\Messenger-CNA\\Tema3\\Tema3\\Server.csproj",
       "packagesPath": "C:\\Users\\alexa\\.nuget\\packages\\",
       "outputPath": "D:\\CNA\\Messenger-CNA\\Tema3\\Tema3\\obj\\",
       "projectStyle": "PackageReference",

@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+option csharp_namespace = "Server";
+
+package greet;
+
+service ChatServices {
+  rpc SendMessageInChat (stream ChatMessage) returns (stream ChatMessage);
+}
+
+
+message ClientDetails {
+	string Id = 1;
+	string name = 2;
+	string color_in_console = 3;
+}
+
+message ChatMessage {
+	string client_id = 1;
+	string client_name = 5;
+	string message = 2;
+	string color = 3;
+	int32 room_id = 4;
+}

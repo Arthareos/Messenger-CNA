@@ -31,7 +31,7 @@ namespace Tema3
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGrpcService<GreeterService>();
+                endpoints.MapGrpcService<ChatService>();
 
                 endpoints.MapGet("/", async context =>
                 {
