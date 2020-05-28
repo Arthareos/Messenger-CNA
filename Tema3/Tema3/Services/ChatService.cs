@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Grpc.Core;
@@ -12,7 +13,7 @@ namespace Tema3
     public class ChatService : ChatServices.ChatServicesBase
     {
         private readonly ILogger<ChatService> _logger;
-        private ChatRoomService chatRoomService=new ChatRoomService();
+        private static ChatRoomService chatRoomService=new ChatRoomService();
         public ChatService(ILogger<ChatService> logger)
         {
             _logger = logger;
@@ -26,7 +27,7 @@ namespace Tema3
         public override async Task SendMessageInChat(Grpc.Core.IAsyncStreamReader<ChatMessage> requestStream,
             Grpc.Core.IServerStreamWriter<ChatMessage> responseStream, Grpc.Core.ServerCallContext context)
         {
-            while (await requestStream.MoveNext())
+            /*while (await requestStream.MoveNext())
             {
                 var chatMessage = requestStream.Current;
                 List<ChatMessage> prevMessages = new List<ChatMessage>();
@@ -35,7 +36,26 @@ namespace Tema3
                 {
                     await responseStream.WriteAsync(chatMessage);
                 }
+            }*/
+
+            if (!await requestStream.MoveNext())
+            {
+                return;
             }
+            /*
+            chatRoomService.ConnectClientToChatRoom(requestStream.Current.RoomId, Guid.Parse(requestStream.Current.ClientId), responseStream);
+            _logger.LogInformation($"{user} connected"); */
+            chatRoomService.ConnectClientToChatRoom( Guid.Parse(requestStream.Current.ClientId), responseStream);
+             while (await requestStream.MoveNext())
+            {
+                var chatMessage = requestStream.Current;
+                
+                foreach (var client in chatRoomService.chatRoom.ClientsInRoom)
+                {
+                    await client.Stream.WriteAsync(chatMessage);
+                }
+            }
+            
         }
     }
 }

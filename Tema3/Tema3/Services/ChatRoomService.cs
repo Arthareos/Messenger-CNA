@@ -9,7 +9,7 @@ namespace Server.Services
 {
     public class ChatRoomService
     {
-		private readonly ChatRoom chatRoom;
+		public readonly ChatRoom chatRoom;
 
 		public ChatRoomService()
 		{
@@ -21,12 +21,12 @@ namespace Server.Services
 			foreach (var client in this.chatRoom.ClientsInRoom)
 			{
 				await client.Stream.WriteAsync(message);
-				Console.WriteLine($"Sent message from {message.ClientName} to {client.Name}");
 			}
 		}
 
 		public void AddClientToChatRoomAsync(ClientDetails client)
-		{			chatRoom.ClientsInRoom.Add(new Client
+		{
+			chatRoom.ClientsInRoom.Add(new Client
 			{
 				Color = client.ColorInConsole,
 				Name = client.Name,
@@ -34,14 +34,14 @@ namespace Server.Services
 			});
 		}
 
-		public void ConnectCustomerToChatRoom(int roomId, Guid customerId, IAsyncStreamWriter<ChatMessage> responseStream)
+		public void ConnectClientToChatRoom( Guid customerId, IAsyncStreamWriter<ChatMessage> responseStream)
 		{
 			chatRoom.ClientsInRoom.FirstOrDefault(c => c.ClientId == customerId).Stream = responseStream;
 		}
 
-		public void DisconnectCustomer(int roomId, Guid customerId)
+		public void DisconnectClient( Guid clientId)
 		{
-			chatRoom.ClientsInRoom.Remove(chatRoom.ClientsInRoom.FirstOrDefault(c => c.ClientId == customerId));
+			chatRoom.ClientsInRoom.Remove(chatRoom.ClientsInRoom.FirstOrDefault(c => c.ClientId == clientId));
 		}
 	}
 }

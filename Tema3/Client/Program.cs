@@ -64,7 +64,7 @@ namespace Client
                 }
                 await streaming.RequestStream.CompleteAsync();
             }
-                //Console.WriteLine(reply.Message);
+
             Console.ReadLine();
         }
         private static string GetRandomChatColor()
