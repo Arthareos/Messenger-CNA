@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.ComTypes;
 using System.Threading.Tasks;
-using Server;
 using Grpc.Core;
 using Grpc.Net.Client;
+using Server;
 
 namespace Client
 {
@@ -14,19 +16,17 @@ namespace Client
             AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
 
             //var channel = GrpcChannel.ForAddress("http://arthareos.go.ro:8888");
-            var channel = GrpcChannel.ForAddress("http://localhost:8888");
-            var client = new ChatServices.ChatServicesClient(channel);
+            GrpcChannel channel = GrpcChannel.ForAddress("http://localhost:8888");
+            ChatServices.ChatServicesClient client = new ChatServices.ChatServicesClient(channel);
 
-            Console.Write("Introduceti Numele: ");
-            string nume = Console.ReadLine();
-            Console.Clear();
+            String name = ReadClientName();
 
             //Create client
             ClientDetails clientDetails = new ClientDetails
             {
-                ColorInConsole = GetRandomChatColor(),
                 Id = Guid.NewGuid().ToString(),
-                Name = args.Length > 0 ? args[0] : nume
+                Name = name,
+                ColorInConsole = GetRandomChatColor()
             };
 
             JoinClientRequest joinClientRequest = new JoinClientRequest { ClientDetails = clientDetails };
@@ -39,51 +39,49 @@ namespace Client
                 {
                     while (await streaming.ResponseStream.MoveNext())
                     {
-                        String aux = streaming.ResponseStream.Current.Message;
-                        aux = aux.Replace(" ", string.Empty);
+                        Console.ForegroundColor = Enum.Parse<ConsoleColor>(streaming.ResponseStream.Current.Color);
 
-                        if (!streaming.ResponseStream.Current.Message.Equals("") && !aux.Equals(""))
+                        if (streaming.ResponseStream.Current.ClientName == clientDetails.Name)
                         {
-                            Console.ForegroundColor = Enum.Parse<ConsoleColor>(streaming.ResponseStream.Current.Color);
-
-                            if (streaming.ResponseStream.Current.ClientName == clientDetails.Name)
-                            {
-                                Console.WriteLine($"You: {streaming.ResponseStream.Current.Message}");
-                            }
-                            else
-                            {
-                                Console.WriteLine($"{streaming.ResponseStream.Current.ClientName}: {streaming.ResponseStream.Current.Message}");
-                            }
-
-                            Console.ForegroundColor = Enum.Parse<ConsoleColor>(clientDetails.ColorInConsole);
+                            Console.Write($"You: ");
                         }
+                        else
+                        {
+                            Console.Write($"{streaming.ResponseStream.Current.ClientName}: ");
+                        }
+
+                        Console.WriteLine($"{streaming.ResponseStream.Current.Message};");
+                        Console.ForegroundColor = Enum.Parse<ConsoleColor>(clientDetails.ColorInConsole);
                     }
                 });
 
                 await streaming.RequestStream.WriteAsync(new ChatMessage
                 {
                     ClientId = clientDetails.Id,
+                    ClientName = clientDetails.Name,
                     Color = clientDetails.ColorInConsole,
-                    Message = "",
-                    ClientName = clientDetails.Name
+                    Message = ""
                 });
 
                 Console.ForegroundColor = Enum.Parse<ConsoleColor>(clientDetails.ColorInConsole);
                 String line = Console.ReadLine();
                 Console.CursorTop -= 1;
 
-                // preia mesajul scris de client
+                //Preia mesajul scris de client
                 while (true)
                 {
-                    ChatMessage messageDetails = new ChatMessage
+                    if (!IsStringEmpty(line))
                     {
-                        ClientName = clientDetails.Name,
-                        ClientId = clientDetails.Id,
-                        Color = clientDetails.ColorInConsole,
-                        Message = line
-                    };
+                        ChatMessage messageDetails = new ChatMessage
+                        {
+                            ClientId = clientDetails.Id,
+                            ClientName = clientDetails.Name,
+                            Color = clientDetails.ColorInConsole,
+                            Message = line
+                        };
 
-                    await streaming.RequestStream.WriteAsync(messageDetails);
+                        await streaming.RequestStream.WriteAsync(messageDetails);
+                    }
 
                     if (string.Equals(line, "qw!", StringComparison.OrdinalIgnoreCase))
                     {
@@ -91,6 +89,7 @@ namespace Client
                     }
 
                     line = Console.ReadLine();
+                    line = line.Trim();
                     Console.CursorTop -= 1;
                 }
 
@@ -98,11 +97,40 @@ namespace Client
             }
         }
 
-        private static string GetRandomChatColor()
+        private static String GetRandomChatColor()
         {
-            var colors = Enum.GetValues(typeof(ConsoleColor));
-            var rnd = new Random();
-            return colors.GetValue(rnd.Next(1, colors.Length - 1)).ToString();
+            Array colors = Enum.GetValues(typeof(ConsoleColor));
+            Random random = new Random();
+            return colors.GetValue(random.Next(1, colors.Length - 1)).ToString();
+        }
+
+        private static bool IsStringEmpty(String message)
+        {
+            if (!message.Equals("") && !message.Replace(" ", string.Empty).Equals(""))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private static String ReadClientName()
+        {
+            Console.Write("Enter your name: ");
+            String name = Console.ReadLine();
+
+            while (IsStringEmpty(name))
+            {
+                Console.Clear();
+                Console.Write("Invalid name! Please enter a new one: ");
+                name = Console.ReadLine();
+            }
+
+            name = name.Trim();
+            Console.Clear();
+            Console.WriteLine($"Your name: {name};");
+
+            return name;
         }
     }
 }
