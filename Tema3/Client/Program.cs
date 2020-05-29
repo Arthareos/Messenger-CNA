@@ -1,8 +1,8 @@
-﻿using Grpc.Net.Client;
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using Server;
 using Grpc.Core;
+using Grpc.Net.Client;
 
 namespace Client
 {
@@ -19,29 +19,44 @@ namespace Client
 
             Console.Write("Introduceti Numele: ");
             string nume = Console.ReadLine();
+            Console.Clear();
 
-            var clientDetails = new ClientDetails
+            //Create client
+            ClientDetails clientDetails = new ClientDetails
             {
                 ColorInConsole = GetRandomChatColor(),
                 Id = Guid.NewGuid().ToString(),
                 Name = args.Length > 0 ? args[0] : nume
             };
-            
-            var joinClientRequest = new JoinClientRequest
-            {
-                ClientDetails = clientDetails
-            };
 
-            var joinClientReply = await client.JoinClientChatAsync(joinClientRequest);
+            JoinClientRequest joinClientRequest = new JoinClientRequest { ClientDetails = clientDetails };
+            JoinClientReply joinClientReply = await client.JoinClientChatAsync(joinClientRequest);
+
+            //Scrie mesajele in consola
             using (var streaming = client.SendMessageInChat(new Metadata { new Metadata.Entry("CustomerName", clientDetails.Name) }))
             {
-                var response = Task.Run(async () =>
+                Task response = Task.Run(async () =>
                 {
                     while (await streaming.ResponseStream.MoveNext())
                     {
-                        Console.ForegroundColor = Enum.Parse<ConsoleColor>(streaming.ResponseStream.Current.Color);
-                        Console.WriteLine($"{streaming.ResponseStream.Current.ClientName}: {streaming.ResponseStream.Current.Message}");
-                        Console.ForegroundColor = Enum.Parse<ConsoleColor>(clientDetails.ColorInConsole);
+                        String aux = streaming.ResponseStream.Current.Message;
+                        aux = aux.Replace(" ", string.Empty);
+
+                        if (!streaming.ResponseStream.Current.Message.Equals("") && !aux.Equals(""))
+                        {
+                            Console.ForegroundColor = Enum.Parse<ConsoleColor>(streaming.ResponseStream.Current.Color);
+
+                            if (streaming.ResponseStream.Current.ClientName == clientDetails.Name)
+                            {
+                                Console.WriteLine($"You: {streaming.ResponseStream.Current.Message}");
+                            }
+                            else
+                            {
+                                Console.WriteLine($"{streaming.ResponseStream.Current.ClientName}: {streaming.ResponseStream.Current.Message}");
+                            }
+
+                            Console.ForegroundColor = Enum.Parse<ConsoleColor>(clientDetails.ColorInConsole);
+                        }
                     }
                 });
 
@@ -53,29 +68,34 @@ namespace Client
                     ClientName = clientDetails.Name
                 });
 
-                var line = Console.ReadLine();
-                //DeletePrevConsoleLine();
-                bool stop = false;
-                //Pana cand nu vad cuvantul magic "qw!" eu trimit mesaje
-                do
+                Console.ForegroundColor = Enum.Parse<ConsoleColor>(clientDetails.ColorInConsole);
+                String line = Console.ReadLine();
+                Console.CursorTop -= 1;
+
+                // preia mesajul scris de client
+                while (true)
                 {
-                    var messageDetails = new ChatMessage
+                    ChatMessage messageDetails = new ChatMessage
                     {
                         ClientName = clientDetails.Name,
                         ClientId = clientDetails.Id,
                         Color = clientDetails.ColorInConsole,
                         Message = line
                     };
+
                     await streaming.RequestStream.WriteAsync(messageDetails);
+
                     if (string.Equals(line, "qw!", StringComparison.OrdinalIgnoreCase))
-                        stop = true;
+                    {
+                        break;
+                    }
+
                     line = Console.ReadLine();
-                    //De sters cu set cursor position si overwrite cu WriteLine ~Simone
-                } while (!stop);
+                    Console.CursorTop -= 1;
+                }
+
                 await streaming.RequestStream.CompleteAsync();
             }
-
-            //await streaming.RequestStream.CompleteAsync();
         }
 
         private static string GetRandomChatColor()

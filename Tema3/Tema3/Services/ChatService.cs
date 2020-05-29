@@ -2,10 +2,8 @@ using System;
 using System.Threading.Tasks;
 using Grpc.Core;
 using Microsoft.Extensions.Logging;
-using Server;
-using Server.Services;
 
-namespace Tema3
+namespace Server.Services
 {
     public class ChatService : ChatServices.ChatServicesBase
     {
@@ -35,28 +33,22 @@ namespace Tema3
             //m_logger.LogInformation($"{user} connected");
 
             m_chatRoomService.ConnectClientToChatRoom(Guid.Parse(requestStream.Current.ClientId), responseStream);
-           /* try
-            {*/
-                while (await requestStream.MoveNext())
-                {
-                    var chatMessage = requestStream.Current;
 
-                    
-                    foreach (var client in m_chatRoomService.chatRoom.Clients)
-                    {
+            while (await requestStream.MoveNext())
+            {
+                var chatMessage = requestStream.Current;
+
+                foreach (var client in m_chatRoomService.chatRoom.Clients)
+                {
                     if (string.Equals(requestStream.Current.Message, "qw!", StringComparison.OrdinalIgnoreCase))
                     {
                         m_chatRoomService.DisconnectClient(Guid.Parse(auxRequest.Current.ClientId));
                         break;
                     }
-                    await client.Stream.WriteAsync(chatMessage);
-                    }
-                }
 
-            /*catch (Exception e)
-            {
-                m_chatRoomService.DisconnectClient(Guid.Parse(requestStream.Current.ClientId));
-            }*/
+                    await client.Stream.WriteAsync(chatMessage);
+                }
+            }
         }
     }
 }

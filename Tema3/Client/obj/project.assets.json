@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v3.1": {
-      "Google.Protobuf/3.12.0": {
+      "Google.Protobuf/3.12.2": {
         "type": "package",
         "dependencies": {
           "System.Memory": "4.5.2"
@@ -14,7 +14,7 @@
           "lib/netstandard2.0/Google.Protobuf.dll": {}
         }
       },
-      "Grpc.Core.Api/2.27.0": {
+      "Grpc.Core.Api/2.29.0": {
         "type": "package",
         "dependencies": {
           "System.Memory": "4.5.3"
@@ -26,11 +26,11 @@
           "lib/netstandard2.0/Grpc.Core.Api.dll": {}
         }
       },
-      "Grpc.Net.Client/2.28.0": {
+      "Grpc.Net.Client/2.29.0": {
         "type": "package",
         "dependencies": {
-          "Grpc.Core.Api": "2.27.0",
-          "Grpc.Net.Common": "2.28.0",
+          "Grpc.Core.Api": "2.29.0",
+          "Grpc.Net.Common": "2.29.0",
           "Microsoft.Extensions.Logging.Abstractions": "2.1.1",
           "System.Diagnostics.DiagnosticSource": "4.5.1"
         },
@@ -41,10 +41,10 @@
           "lib/netstandard2.1/Grpc.Net.Client.dll": {}
         }
       },
-      "Grpc.Net.Common/2.28.0": {
+      "Grpc.Net.Common/2.29.0": {
         "type": "package",
         "dependencies": {
-          "Grpc.Core.Api": "2.27.0"
+          "Grpc.Core.Api": "2.29.0"
         },
         "compile": {
           "lib/netstandard2.1/Grpc.Net.Common.dll": {}
@@ -90,14 +90,14 @@
     }
   },
   "libraries": {
-    "Google.Protobuf/3.12.0": {
-      "sha512": "4z5foBz8qKbGJCL1McO4dvEz4uSoROTbw5L6yGw+bZ0lqD+rz+1Qne4Avdiq3oq+/OO8iSq2tc66DMWGpRl3zA==",
+    "Google.Protobuf/3.12.2": {
+      "sha512": "8JZLQ9UGwBltiGF6EfFaHa2NG1IlNzadyi4d+9rCjGa8/M+beummP4BRY1vFl1i4Wm8kicEC22Shm8ecQmjaYQ==",
       "type": "package",
-      "path": "google.protobuf/3.12.0",
+      "path": "google.protobuf/3.12.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "google.protobuf.3.12.0.nupkg.sha512",
+        "google.protobuf.3.12.2.nupkg.sha512",
         "google.protobuf.nuspec",
         "lib/net45/Google.Protobuf.dll",
         "lib/net45/Google.Protobuf.pdb",
@@ -110,14 +110,14 @@
         "lib/netstandard2.0/Google.Protobuf.xml"
       ]
     },
-    "Grpc.Core.Api/2.27.0": {
-      "sha512": "UAHXfV+n6TEMCybML7V+1qWP7G9byGXUE2mtATWpctP7xB8P5J++iYMuyxrprKkC36X/QuUwHJmHpBxlDHzF2g==",
+    "Grpc.Core.Api/2.29.0": {
+      "sha512": "0jBIZo2f6KkCPD0vxD8rs4tASTp0lwPcyE8BfxQ/dx39eQ4qAPD/eB7JZNlG9rXrzrYBuU4Etdr4eysYVddqYA==",
       "type": "package",
-      "path": "grpc.core.api/2.27.0",
+      "path": "grpc.core.api/2.29.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "grpc.core.api.2.27.0.nupkg.sha512",
+        "grpc.core.api.2.29.0.nupkg.sha512",
         "grpc.core.api.nuspec",
         "lib/net45/Grpc.Core.Api.dll",
         "lib/net45/Grpc.Core.Api.pdb",
@@ -130,14 +130,14 @@
         "lib/netstandard2.0/Grpc.Core.Api.xml"
       ]
     },
-    "Grpc.Net.Client/2.28.0": {
-      "sha512": "HtcnNJS6XQlkFQWOCC66x2QlfPLSeVFM4o0bIXn6xs9hogBJzgqY5jaoda6ZqdHvnQHBYK0rP6SNTj9hALn38A==",
+    "Grpc.Net.Client/2.29.0": {
+      "sha512": "uxMV3TMWyd60zJaqWeGCQCybSihplR+JyNGuzny9qyKTCGkcB0U4vPe8O6CJMG8GQyKevu103xsURWF/XNVrBg==",
       "type": "package",
-      "path": "grpc.net.client/2.28.0",
+      "path": "grpc.net.client/2.29.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "grpc.net.client.2.28.0.nupkg.sha512",
+        "grpc.net.client.2.29.0.nupkg.sha512",
         "grpc.net.client.nuspec",
         "lib/netstandard2.1/Grpc.Net.Client.dll",
         "lib/netstandard2.1/Grpc.Net.Client.pdb",
@@ -145,14 +145,14 @@
         "packageIcon.png"
       ]
     },
-    "Grpc.Net.Common/2.28.0": {
-      "sha512": "utqtswCYVTwY4IcLTC0LeY2Q01L9WB0nKUj9pRQXXnGnvcpvCCWPKcspV04+59rjCROovOXlqW0ypwKXapAGxQ==",
+    "Grpc.Net.Common/2.29.0": {
+      "sha512": "7Jxd1HFG2fzK2Q8Kf33/G79weBFto4pBerYU+NWV93cUr5W6WI1cne/9D3t9fFs0fgaboX8pUzVvfoGL39GVqw==",
       "type": "package",
-      "path": "grpc.net.common/2.28.0",
+      "path": "grpc.net.common/2.29.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "grpc.net.common.2.28.0.nupkg.sha512",
+        "grpc.net.common.2.29.0.nupkg.sha512",
         "grpc.net.common.nuspec",
         "lib/netstandard2.1/Grpc.Net.Common.dll",
         "lib/netstandard2.1/Grpc.Net.Common.pdb",
@@ -207,7 +207,7 @@
       ]
     },
     "Microsoft.Extensions.Logging.Abstractions/2.1.1": {
-      "sha512": "XRzK7ZF+O6FzdfWrlFTi1Rgj2080ZDsd46vzOjadHUB0Cz5kOvDG8vI7caa5YFrsHQpcfn0DxtjS4E46N4FZsA==",
+      "sha512": "QWFWKrdeoDSEr8nVJaBAVDMj24wnh9clGzDNmMdgHHRsOIwTUMeh4XljeZXJhIKPT00jWuzwEzn3uNxOtO4cYg==",
       "type": "package",
       "path": "microsoft.extensions.logging.abstractions/2.1.1",
       "files": [
@@ -268,31 +268,30 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
-      "Google.Protobuf >= 3.12.0",
-      "Grpc.Net.Client >= 2.28.0",
+      "Google.Protobuf >= 3.12.2",
+      "Grpc.Net.Client >= 2.29.0",
       "Grpc.Tools >= 2.29.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\alexa\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
+    "C:\\Users\\difon\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\CNA\\Messenger-CNA\\Tema3\\Client\\Client.csproj",
+      "projectUniqueName": "D:\\Dev\\Messenger-CNA\\Tema3\\Client\\Client.csproj",
       "projectName": "Client",
-      "projectPath": "D:\\CNA\\Messenger-CNA\\Tema3\\Client\\Client.csproj",
-      "packagesPath": "C:\\Users\\alexa\\.nuget\\packages\\",
-      "outputPath": "D:\\CNA\\Messenger-CNA\\Tema3\\Client\\obj\\",
+      "projectPath": "D:\\Dev\\Messenger-CNA\\Tema3\\Client\\Client.csproj",
+      "packagesPath": "C:\\Users\\difon\\.nuget\\packages\\",
+      "outputPath": "D:\\Dev\\Messenger-CNA\\Tema3\\Client\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\"
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\alexa\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Users\\difon\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
@@ -317,11 +316,11 @@
         "dependencies": {
           "Google.Protobuf": {
             "target": "Package",
-            "version": "[3.12.0, )"
+            "version": "[3.12.2, )"
           },
           "Grpc.Net.Client": {
             "target": "Package",
-            "version": "[2.28.0, )"
+            "version": "[2.29.0, )"
           },
           "Grpc.Tools": {
             "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
@@ -340,12 +339,18 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[3.1.2, 3.1.2]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.300\\RuntimeIdentifierGraph.json"
       }
     }
   }

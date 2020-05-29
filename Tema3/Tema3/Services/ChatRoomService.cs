@@ -1,8 +1,8 @@
-﻿using Grpc.Core;
-using Server.Models;
-using System;
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Grpc.Core;
+using Server.Models;
 
 namespace Server.Services
 {

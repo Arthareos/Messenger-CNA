@@ -1,22 +1,19 @@
 ﻿using Grpc.Core;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Server.Models
 {
     public class Client
     {
         private Guid m_ID;
-        private string m_name;
-        private string m_color;
+        private String m_name;
+        private String m_color;
         public IAsyncStreamWriter<ChatMessage> m_stream;
        
         public Client()
         {
-            m_name = string.Empty;
-            m_color = string.Empty;
+            m_name = String.Empty;
+            m_color = String.Empty;
         }
 
         public Guid ID
@@ -31,7 +28,7 @@ namespace Server.Models
             }
         }
 
-        public string Name
+        public String Name
         {
             get
             {
@@ -43,7 +40,7 @@ namespace Server.Models
             }
         }
 
-        public string Color
+        public String Color
         {
             get
             {

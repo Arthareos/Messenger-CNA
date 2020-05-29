@@ -27,5 +27,4 @@ message JoinClientRequest {
 	ClientDetails clientDetails = 1;
 }
 
-message JoinClientReply {
-}
+message JoinClientReply {}
