@@ -16,7 +16,7 @@ namespace Tema3
         {
             m_logger = logger;
         }
-        
+
         public override Task<JoinClientReply> JoinClientChat(JoinClientRequest request, ServerCallContext context)
         {
             m_chatRoomService.AddClientToChatRoomAsync(request.ClientDetails);
@@ -25,27 +25,38 @@ namespace Tema3
 
         public override async Task SendMessageInChat(Grpc.Core.IAsyncStreamReader<ChatMessage> requestStream,
             Grpc.Core.IServerStreamWriter<ChatMessage> responseStream, Grpc.Core.ServerCallContext context)
-        { 
+        {
+            var auxRequest = requestStream;
             if (!await requestStream.MoveNext())
             {
                 return;
             }
-            
+
             //m_logger.LogInformation($"{user} connected");
 
             m_chatRoomService.ConnectClientToChatRoom(Guid.Parse(requestStream.Current.ClientId), responseStream);
-
-            while (await requestStream.MoveNext())
-            {
-                var chatMessage = requestStream.Current;
-                
-                foreach (var client in m_chatRoomService.chatRoom.Clients)
+           /* try
+            {*/
+                while (await requestStream.MoveNext())
                 {
-                    await client.Stream.WriteAsync(chatMessage);
-                }
-            }
+                    var chatMessage = requestStream.Current;
 
-            m_chatRoomService.DisconnectClient(Guid.Parse(requestStream.Current.ClientId));
+                    
+                    foreach (var client in m_chatRoomService.chatRoom.Clients)
+                    {
+                    if (string.Equals(requestStream.Current.Message, "qw!", StringComparison.OrdinalIgnoreCase))
+                    {
+                        m_chatRoomService.DisconnectClient(Guid.Parse(auxRequest.Current.ClientId));
+                        break;
+                    }
+                    await client.Stream.WriteAsync(chatMessage);
+                    }
+                }
+
+            /*catch (Exception e)
+            {
+                m_chatRoomService.DisconnectClient(Guid.Parse(requestStream.Current.ClientId));
+            }*/
         }
     }
 }

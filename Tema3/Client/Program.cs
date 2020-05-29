@@ -33,46 +33,49 @@ namespace Client
             };
 
             var joinClientReply = await client.JoinClientChatAsync(joinClientRequest);
-            using var streaming = client.SendMessageInChat(new Metadata { new Metadata.Entry("CustomerName", clientDetails.Name) });
-
-            var response = Task.Run(async () =>
+            using (var streaming = client.SendMessageInChat(new Metadata { new Metadata.Entry("CustomerName", clientDetails.Name) }))
             {
-                while (await streaming.ResponseStream.MoveNext())
+                var response = Task.Run(async () =>
                 {
-                    Console.ForegroundColor = Enum.Parse<ConsoleColor>(streaming.ResponseStream.Current.Color);
-                    Console.WriteLine($"{streaming.ResponseStream.Current.ClientName}: {streaming.ResponseStream.Current.Message}");
-                    Console.ForegroundColor = Enum.Parse<ConsoleColor>(clientDetails.ColorInConsole);
-                }
-            });
+                    while (await streaming.ResponseStream.MoveNext())
+                    {
+                        Console.ForegroundColor = Enum.Parse<ConsoleColor>(streaming.ResponseStream.Current.Color);
+                        Console.WriteLine($"{streaming.ResponseStream.Current.ClientName}: {streaming.ResponseStream.Current.Message}");
+                        Console.ForegroundColor = Enum.Parse<ConsoleColor>(clientDetails.ColorInConsole);
+                    }
+                });
 
-            await streaming.RequestStream.WriteAsync(new ChatMessage
-            {
-                ClientId = clientDetails.Id,
-                Color = clientDetails.ColorInConsole,
-                Message = "",
-                ClientName = clientDetails.Name
-            });
-
-            var line = Console.ReadLine();
-            //DeletePrevConsoleLine();
-
-            //Pana cand nu vad cuvantul magic "qw!" eu trimit mesaje
-            while (!string.Equals(line, "qw!", StringComparison.OrdinalIgnoreCase))
-            {
-                var messageDetails = new ChatMessage
+                await streaming.RequestStream.WriteAsync(new ChatMessage
                 {
-                    ClientName = clientDetails.Name,
                     ClientId = clientDetails.Id,
                     Color = clientDetails.ColorInConsole,
-                    Message = line
-                };
+                    Message = "",
+                    ClientName = clientDetails.Name
+                });
 
-                await streaming.RequestStream.WriteAsync(messageDetails);
-                line = Console.ReadLine();
-                //De sters cu set cursor position si overwrite cu WriteLine ~Simone
+                var line = Console.ReadLine();
+                //DeletePrevConsoleLine();
+                bool stop = false;
+                //Pana cand nu vad cuvantul magic "qw!" eu trimit mesaje
+                do
+                {
+                    var messageDetails = new ChatMessage
+                    {
+                        ClientName = clientDetails.Name,
+                        ClientId = clientDetails.Id,
+                        Color = clientDetails.ColorInConsole,
+                        Message = line
+                    };
+                    await streaming.RequestStream.WriteAsync(messageDetails);
+                    if (string.Equals(line, "qw!", StringComparison.OrdinalIgnoreCase))
+                        stop = true;
+                    line = Console.ReadLine();
+                    //De sters cu set cursor position si overwrite cu WriteLine ~Simone
+                } while (!stop);
+                await streaming.RequestStream.CompleteAsync();
             }
 
-            await streaming.RequestStream.CompleteAsync();
+            //await streaming.RequestStream.CompleteAsync();
         }
 
         private static string GetRandomChatColor()
