@@ -8,7 +8,7 @@ namespace Server.Services
 {
     public class ChatRoomService
     {
-		public readonly ChatRoom chatRoom;
+		public ChatRoom chatRoom;
 
 		public ChatRoomService()
 		{
@@ -17,7 +17,7 @@ namespace Server.Services
 
 		public async Task BroadcastMessageAsync(ChatMessage message)
 		{
-			foreach (var client in this.chatRoom.ClientsInRoom)
+			foreach (var client in this.chatRoom.Clients)
 			{
 				await client.Stream.WriteAsync(message);
 			}
@@ -25,22 +25,22 @@ namespace Server.Services
 
 		public void AddClientToChatRoomAsync(ClientDetails client)
 		{
-			chatRoom.ClientsInRoom.Add(new Client
+			chatRoom.Clients.Add(new Client
 			{
 				Color = client.ColorInConsole,
 				Name = client.Name,
-				ClientId = Guid.Parse(client.Id)
+				ID = Guid.Parse(client.Id)
 			});
 		}
 
-		public void ConnectClientToChatRoom( Guid customerId, IAsyncStreamWriter<ChatMessage> responseStream)
+		public void ConnectClientToChatRoom(Guid customerId, IAsyncStreamWriter<ChatMessage> responseStream)
 		{
-			chatRoom.ClientsInRoom.FirstOrDefault(c => c.ClientId == customerId).Stream = responseStream;
+			chatRoom.Clients.FirstOrDefault(c => c.ID == customerId).Stream = responseStream;
 		}
 
-		public void DisconnectClient( Guid clientId)
+		public void DisconnectClient(Guid clientId)
 		{
-			chatRoom.ClientsInRoom.Remove(chatRoom.ClientsInRoom.FirstOrDefault(c => c.ClientId == clientId));
+			chatRoom.Clients.Remove(chatRoom.Clients.FirstOrDefault(c => c.ID == clientId));
 		}
 	}
 }

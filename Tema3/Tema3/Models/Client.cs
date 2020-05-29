@@ -8,36 +8,26 @@ namespace Server.Models
 {
     public class Client
     {
-        private Guid clientId;
-        private string name;
-        private string color;
-        public IAsyncStreamWriter<ChatMessage> stream;
+        private Guid m_ID;
+        private string m_name;
+        private string m_color;
+        public IAsyncStreamWriter<ChatMessage> m_stream;
        
         public Client()
         {
-            name = string.Empty;
-            color = string.Empty;
+            m_name = string.Empty;
+            m_color = string.Empty;
         }
-        public IAsyncStreamWriter<ChatMessage> Stream 
-        {
-            get 
-            {
-                return this.stream;
-            }
-            set
-            {
-                this.stream = value;
-            }
-        }
-        public Guid ClientId
+
+        public Guid ID
         {
             get
             {
-                return this.clientId;
+                return this.m_ID;
             }
             set
             {
-                this.clientId = value;
+                this.m_ID = value;
             }
         }
 
@@ -45,11 +35,11 @@ namespace Server.Models
         {
             get
             {
-                return this.name;
+                return this.m_name;
             }
             set
             {
-                this.name = value;
+                this.m_name = value;
             }
         }
 
@@ -57,13 +47,24 @@ namespace Server.Models
         {
             get
             {
-                return this.color;
+                return this.m_color;
             }
             set
             {
-                this.color = value;
+                this.m_color = value;
             }
         }
 
+        public IAsyncStreamWriter<ChatMessage> Stream
+        {
+            get
+            {
+                return this.m_stream;
+            }
+            set
+            {
+                this.m_stream = value;
+            }
+        }
     }
 }

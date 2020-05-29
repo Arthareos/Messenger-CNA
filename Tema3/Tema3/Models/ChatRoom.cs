@@ -1,23 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Server.Models
 {
     public class ChatRoom
     {
-        private List<Client> clientsInRoom;
-        public List<Client> ClientsInRoom
+        private List<Client> m_clients;
+
+        public ChatRoom()
+        {
+            m_clients = new List<Client>();
+        }
+
+        public List<Client> Clients
         {
             get
             {
-                return clientsInRoom;
+                return m_clients;
             }
-        }
-        public ChatRoom()
-        {
-            clientsInRoom = new List<Client>();
         }
     }
 }

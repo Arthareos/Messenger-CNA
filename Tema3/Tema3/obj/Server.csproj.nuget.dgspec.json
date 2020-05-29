@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Dev\\Messenger-CNA\\Tema3\\Tema3\\Server.csproj": {}
+    "D:\\Dev\\Messenger-CNA\\Tema3\\Tema3\\Server.csproj": {}
   },
   "projects": {
-    "C:\\Dev\\Messenger-CNA\\Tema3\\Tema3\\Server.csproj": {
+    "D:\\Dev\\Messenger-CNA\\Tema3\\Tema3\\Server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Dev\\Messenger-CNA\\Tema3\\Tema3\\Server.csproj",
+        "projectUniqueName": "D:\\Dev\\Messenger-CNA\\Tema3\\Tema3\\Server.csproj",
         "projectName": "Server",
-        "projectPath": "C:\\Dev\\Messenger-CNA\\Tema3\\Tema3\\Server.csproj",
+        "projectPath": "D:\\Dev\\Messenger-CNA\\Tema3\\Tema3\\Server.csproj",
         "packagesPath": "C:\\Users\\difon\\.nuget\\packages\\",
-        "outputPath": "C:\\Dev\\Messenger-CNA\\Tema3\\Tema3\\obj\\",
+        "outputPath": "D:\\Dev\\Messenger-CNA\\Tema3\\Tema3\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

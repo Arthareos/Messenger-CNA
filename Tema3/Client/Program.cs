@@ -10,8 +10,11 @@ namespace Client
     {
         static async Task Main(string[] args)
         {
-            //var channel = GrpcChannel.ForAddress("https://arthareos.go.ro:5002");
-            var channel = GrpcChannel.ForAddress("https://localhost:5002");
+            // Face ca aplicatia sa mearga fara https ~Simone
+            AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
+
+            //var channel = GrpcChannel.ForAddress("http://arthareos.go.ro:8888");
+            var channel = GrpcChannel.ForAddress("http://localhost:8888");
             var client = new ChatServices.ChatServicesClient(channel);
 
             Console.Write("Introduceti Numele: ");
@@ -66,7 +69,7 @@ namespace Client
 
                 await streaming.RequestStream.WriteAsync(messageDetails);
                 line = Console.ReadLine();
-                //De sters cu set cursor position si overwrite cu WriteLine
+                //De sters cu set cursor position si overwrite cu WriteLine ~Simone
             }
 
             await streaming.RequestStream.CompleteAsync();

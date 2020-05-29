@@ -3,8 +3,8 @@
     "Tema3": {
       "commandName": "Project",
       "launchBrowser": false,
-      //"applicationUrl": "https://arthareos.go.ro:5002",
-      "applicationUrl": "https://localhost:5002",
+      "applicationUrl": "http://localhost:8888",
+      //"applicationUrl": "http://arthareos.go.ro:8888",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

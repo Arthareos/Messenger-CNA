@@ -207,7 +207,7 @@
       ]
     },
     "Microsoft.Extensions.Logging.Abstractions/2.1.1": {
-      "sha512": "XRzK7ZF+O6FzdfWrlFTi1Rgj2080ZDsd46vzOjadHUB0Cz5kOvDG8vI7caa5YFrsHQpcfn0DxtjS4E46N4FZsA==",
+      "sha512": "QWFWKrdeoDSEr8nVJaBAVDMj24wnh9clGzDNmMdgHHRsOIwTUMeh4XljeZXJhIKPT00jWuzwEzn3uNxOtO4cYg==",
       "type": "package",
       "path": "microsoft.extensions.logging.abstractions/2.1.1",
       "files": [
@@ -280,11 +280,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Dev\\Messenger-CNA\\Tema3\\Client\\Client.csproj",
+      "projectUniqueName": "D:\\Dev\\Messenger-CNA\\Tema3\\Client\\Client.csproj",
       "projectName": "Client",
-      "projectPath": "C:\\Dev\\Messenger-CNA\\Tema3\\Client\\Client.csproj",
+      "projectPath": "D:\\Dev\\Messenger-CNA\\Tema3\\Client\\Client.csproj",
       "packagesPath": "C:\\Users\\difon\\.nuget\\packages\\",
-      "outputPath": "C:\\Dev\\Messenger-CNA\\Tema3\\Client\\obj\\",
+      "outputPath": "D:\\Dev\\Messenger-CNA\\Tema3\\Client\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
