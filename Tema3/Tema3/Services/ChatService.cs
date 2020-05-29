@@ -1,7 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using Grpc.Core;
 using Microsoft.Extensions.Logging;
@@ -26,27 +23,17 @@ namespace Tema3
         }
         public override async Task SendMessageInChat(Grpc.Core.IAsyncStreamReader<ChatMessage> requestStream,
             Grpc.Core.IServerStreamWriter<ChatMessage> responseStream, Grpc.Core.ServerCallContext context)
-        {
-            /*while (await requestStream.MoveNext())
-            {
-                var chatMessage = requestStream.Current;
-                List<ChatMessage> prevMessages = new List<ChatMessage>();
-                prevMessages.Add(chatMessage);
-                foreach (var message in prevMessages)
-                {
-                    await responseStream.WriteAsync(chatMessage);
-                }
-            }*/
-
+        { 
             if (!await requestStream.MoveNext())
             {
                 return;
             }
-            /*
-            chatRoomService.ConnectClientToChatRoom(requestStream.Current.RoomId, Guid.Parse(requestStream.Current.ClientId), responseStream);
-            _logger.LogInformation($"{user} connected"); */
-            chatRoomService.ConnectClientToChatRoom( Guid.Parse(requestStream.Current.ClientId), responseStream);
-             while (await requestStream.MoveNext())
+            
+            //logger.LogInformation($"{user} connected");
+
+            chatRoomService.ConnectClientToChatRoom(Guid.Parse(requestStream.Current.ClientId), responseStream);
+
+            while (await requestStream.MoveNext())
             {
                 var chatMessage = requestStream.Current;
                 
@@ -55,7 +42,8 @@ namespace Tema3
                     await client.Stream.WriteAsync(chatMessage);
                 }
             }
-            
+
+            chatRoomService.DisconnectClient(Guid.Parse(requestStream.Current.ClientId));
         }
     }
 }

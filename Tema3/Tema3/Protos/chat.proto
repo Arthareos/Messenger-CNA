@@ -5,11 +5,9 @@ option csharp_namespace = "Server";
 package greet;
 
 service ChatServices {
-
-  rpc SendMessageInChat (stream ChatMessage) returns (stream ChatMessage);
-  rpc JoinClientChat (JoinClientRequest) returns (JoinClientReply); 
+	rpc SendMessageInChat (stream ChatMessage) returns (stream ChatMessage);
+	rpc JoinClientChat (JoinClientRequest) returns (JoinClientReply); 
 }
-
 
 message ClientDetails {
 	string Id = 1;
