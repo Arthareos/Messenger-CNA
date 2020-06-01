@@ -7,10 +7,7 @@
         mc:Ignorable="d"
         Title="UatzAp" Height="490" Width="450" ResizeMode="NoResize">
     <Grid Background="#2A3132">
-        <Menu DockPanel.Dock="Top" Margin="0,10,0,415" Background="#336B87">
-            <MenuItem Header="_Hide Participants" Click="mnuHideParticipants1_Click"/>
-            <MenuItem Header="_Quit Chat" Click="mnuQuitChat_Click"/>
-        </Menu>
-        <TextBox x:Name="txtChat" HorizontalAlignment="Center" Margin="0,44,0,0" VerticalAlignment="Top" Width="380" Height="375" Background="#90AFC5"/>
+        <TextBox x:Name="txtChat" HorizontalAlignment="Center" Margin="0,29,0,0" VerticalAlignment="Top" Width="380" Height="350" Background="#90AFC5"/>
+        <Button x:Name="btnHideParticipants" Content="Hide Participants" HorizontalAlignment="Center" Margin="0,404,0,0" VerticalAlignment="Top" Height="40" Width="134" FontSize="16" Click="btnHideParticipants_Click"/>
     </Grid>
 </Window>

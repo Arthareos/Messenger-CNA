@@ -28,13 +28,11 @@ namespace MessengerUIDesign
         {
             Window window = new ParticipantsView();
             window.Show();
-            Close();
             return;
         }
-        private void mnu_QuitChat_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Aici o sa scriem si trimitem qt! ca sa oprim stream-ul");
-            Close();
+        public void mnu_QuitChat_Click(object sender, RoutedEventArgs e)
+        { 
+            txtChat.Text = txtChat.Text+"qw!";
         }
         private void btnSend_Click(object sender, RoutedEventArgs e)
         {

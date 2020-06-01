@@ -21,17 +21,8 @@ namespace MessengerUIDesign
         {
             InitializeComponent();
         }
-        private void mnuHideParticipants1_Click(object sender, RoutedEventArgs e)
+        private void btnHideParticipants_Click(object sender, RoutedEventArgs e)
         {
-            Window window = new MainWindow();
-            window.Show();
-            Close();
-            return;
-        }
-
-        private void mnuQuitChat_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Aici o sa scriem si trimitem qt! ca sa oprim stream-ul");
             Close();
         }
     }
