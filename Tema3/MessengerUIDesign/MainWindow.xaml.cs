@@ -15,25 +15,20 @@ using System.Windows.Shapes;
 
 namespace MessengerUIDesign
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
         }
+
         private void mnuShowParticipants_Click(object sender, RoutedEventArgs e)
         {
             Window window = new ParticipantsView();
             window.Show();
             return;
         }
-        public void mnu_QuitChat_Click(object sender, RoutedEventArgs e)
-        { 
-            txtChat.Text = txtChat.Text+"qw!";
-        }
+
         private void btnSend_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrEmpty(txtChat.Text))

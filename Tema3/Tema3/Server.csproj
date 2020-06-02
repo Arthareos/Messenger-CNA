@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="3.12.2" />
     <PackageReference Include="Grpc.AspNetCore" Version="2.29.0" />
   </ItemGroup>
 

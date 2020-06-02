@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v3.1": {
-      "Google.Protobuf/3.11.4": {
+      "Google.Protobuf/3.12.2": {
         "type": "package",
         "dependencies": {
           "System.Memory": "4.5.2"
@@ -260,14 +260,14 @@
     }
   },
   "libraries": {
-    "Google.Protobuf/3.11.4": {
-      "sha512": "dajCxjDCiPyZuqwZCkFJTwhn/0TJ5VesIs4fXvs56ez1VUi68JjhYMMsPjnJ9gcPqJwTMtXMU1WqUdXYiG1x4w==",
+    "Google.Protobuf/3.12.2": {
+      "sha512": "8JZLQ9UGwBltiGF6EfFaHa2NG1IlNzadyi4d+9rCjGa8/M+beummP4BRY1vFl1i4Wm8kicEC22Shm8ecQmjaYQ==",
       "type": "package",
-      "path": "google.protobuf/3.11.4",
+      "path": "google.protobuf/3.12.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "google.protobuf.3.11.4.nupkg.sha512",
+        "google.protobuf.3.12.2.nupkg.sha512",
         "google.protobuf.nuspec",
         "lib/net45/Google.Protobuf.dll",
         "lib/net45/Google.Protobuf.pdb",
@@ -625,24 +625,30 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
+      "Google.Protobuf >= 3.12.2",
       "Grpc.AspNetCore >= 2.29.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Vlad\\.nuget\\packages\\": {}
+    "C:\\Users\\difon\\.nuget\\packages\\": {},
+    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\CNA\\Messenger\\Messenger-CNA\\Tema3\\Tema3\\Server.csproj",
+      "projectUniqueName": "C:\\Dev\\Messenger-CNA\\Tema3\\Tema3\\Server.csproj",
       "projectName": "Server",
-      "projectPath": "D:\\CNA\\Messenger\\Messenger-CNA\\Tema3\\Tema3\\Server.csproj",
-      "packagesPath": "C:\\Users\\Vlad\\.nuget\\packages\\",
-      "outputPath": "D:\\CNA\\Messenger\\Messenger-CNA\\Tema3\\Tema3\\obj\\",
+      "projectPath": "C:\\Dev\\Messenger-CNA\\Tema3\\Tema3\\Server.csproj",
+      "packagesPath": "C:\\Users\\difon\\.nuget\\packages\\",
+      "outputPath": "C:\\Dev\\Messenger-CNA\\Tema3\\Tema3\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Microsoft\\Xamarin\\NuGet\\"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Vlad\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\difon\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
@@ -665,6 +671,10 @@
     "frameworks": {
       "netcoreapp3.1": {
         "dependencies": {
+          "Google.Protobuf": {
+            "target": "Package",
+            "version": "[3.12.2, )"
+          },
           "Grpc.AspNetCore": {
             "target": "Package",
             "version": "[2.29.0, )"
@@ -680,6 +690,12 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[3.1.2, 3.1.2]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -688,7 +704,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.300\\RuntimeIdentifierGraph.json"
       }
     }
   }
