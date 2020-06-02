@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Grpc.Core;
 using Microsoft.Extensions.Logging;
+using Server.Models;
 
 namespace Server.Services
 {
@@ -29,8 +30,11 @@ namespace Server.Services
             {
                 return;
             }
-
-            //m_logger.LogInformation($"{user} connected");
+            
+            foreach(var client in m_chatRoomService.chatRoom.Clients)
+            {
+                Console.Write("[INFO] " + client.Name + " is connected!\n");
+            }
 
             m_chatRoomService.ConnectClientToChatRoom(Guid.Parse(requestStream.Current.ClientId), responseStream);
 
@@ -42,6 +46,7 @@ namespace Server.Services
                 {
                     if (string.Equals(requestStream.Current.Message, "qw!", StringComparison.OrdinalIgnoreCase))
                     {
+                        Console.Write("[INFO] " + client.Name + " disconnected!\n");
                         m_chatRoomService.DisconnectClient(Guid.Parse(auxRequest.Current.ClientId));
                         break;
                     }
