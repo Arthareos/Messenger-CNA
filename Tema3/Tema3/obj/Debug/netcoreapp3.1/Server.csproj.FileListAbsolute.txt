@@ -62,7 +62,6 @@ C:\Dev\Messenger-CNA\Tema3\Tema3\bin\Debug\netcoreapp3.1\Server.runtimeconfig.js
 C:\Dev\Messenger-CNA\Tema3\Tema3\bin\Debug\netcoreapp3.1\Server.runtimeconfig.dev.json
 C:\Dev\Messenger-CNA\Tema3\Tema3\bin\Debug\netcoreapp3.1\Server.dll
 C:\Dev\Messenger-CNA\Tema3\Tema3\bin\Debug\netcoreapp3.1\Server.pdb
-C:\Dev\Messenger-CNA\Tema3\Tema3\obj\Debug\netcoreapp3.1\Server.csprojAssemblyReference.cache
 C:\Dev\Messenger-CNA\Tema3\Tema3\obj\Debug\netcoreapp3.1\Server.AssemblyInfoInputs.cache
 C:\Dev\Messenger-CNA\Tema3\Tema3\obj\Debug\netcoreapp3.1\Server.AssemblyInfo.cs
 C:\Dev\Messenger-CNA\Tema3\Tema3\obj\Debug\netcoreapp3.1\Server.RazorTargetAssemblyInfo.cache

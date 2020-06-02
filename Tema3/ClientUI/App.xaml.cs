@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace MessengerUIDesign
+namespace ClientUI
 {
     /// <summary>
     /// Interaction logic for App.xaml

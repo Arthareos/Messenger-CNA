@@ -1,9 +1,9 @@
-﻿<Window x:Class="MessengerUIDesign.MainWindow"
+﻿<Window x:Class="ClientUI.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MessengerUIDesign"
+        xmlns:local="clr-namespace:ClientUI"
         mc:Ignorable="d"
         
         Title="UatzAp"
@@ -63,11 +63,11 @@
             <RowDefinition Height="40*"/>
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
-        
+
         <Menu DockPanel.Dock="Top" Background="#336B87" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="7">
-            <MenuItem Header="Show Participants" Click="mnuShowParticipants_Click"/>
+            <MenuItem Header="Show Participants"/>
         </Menu>
-        
+
         <TextBox x:Name="txtChat"    Style="{StaticResource Feed}"/>
 
         <TextBox x:Name="txtMessage" Style="{StaticResource Input}"/>

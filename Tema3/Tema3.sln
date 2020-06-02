@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Server", "Tema3\Server.cspr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client", "Client\Client.csproj", "{8C7B3E77-C643-4B0B-A801-539F935EA166}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessengerUIDesign", "MessengerUIDesign\MessengerUIDesign.csproj", "{9558EC9F-4185-4B56-A777-BAC58296E708}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientUI", "ClientUI\ClientUI.csproj", "{0234CD07-9A54-496E-AAD3-2A760F174AED}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{8C7B3E77-C643-4B0B-A801-539F935EA166}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C7B3E77-C643-4B0B-A801-539F935EA166}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C7B3E77-C643-4B0B-A801-539F935EA166}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9558EC9F-4185-4B56-A777-BAC58296E708}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9558EC9F-4185-4B56-A777-BAC58296E708}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9558EC9F-4185-4B56-A777-BAC58296E708}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9558EC9F-4185-4B56-A777-BAC58296E708}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0234CD07-9A54-496E-AAD3-2A760F174AED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0234CD07-9A54-496E-AAD3-2A760F174AED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0234CD07-9A54-496E-AAD3-2A760F174AED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0234CD07-9A54-496E-AAD3-2A760F174AED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
