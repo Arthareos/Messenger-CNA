@@ -6,6 +6,13 @@ using Server;
 
 namespace Client
 {
+    static class Constants
+    {
+        public const char Bold = '*';
+        public const char Italic = '_';
+        public const char StrikeThrough = '~';
+        public const char Underlined = '#';
+    }
     class Program
     {
         static async Task Main(string[] args)
@@ -129,6 +136,34 @@ namespace Client
             Console.WriteLine($"Your name: {name};");
 
             return name;
+        }
+
+        private Boolean isTextFormatable(char predefinedCharacter, string message)
+        {
+            bool firstApparence = false;
+            bool secondApparence = false;
+            int i, j;
+            for (i = 0; i < message.Length; i++)
+            {
+                if (message[i] == predefinedCharacter)
+                    firstApparence = true;
+                i++;
+                break;
+            }
+            while (i != message.Length)
+            {
+                j = i;
+                if (message[j] == predefinedCharacter)
+                {
+                    secondApparence = true;
+                    break;
+                }
+                i++;
+            }
+            if (firstApparence == true && secondApparence == true)
+                return true;
+            else
+                return false;
         }
     }
 }
