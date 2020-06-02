@@ -95,6 +95,7 @@ namespace Client
                 Console.ForegroundColor = Enum.Parse<ConsoleColor>(clientDetails.ColorInConsole);
                 String line = Console.ReadLine();
                 Console.CursorTop -= 1;
+                line = TextFormatter(line, clientDetails);
 
                 //Preia mesajul scris de client
                 while (true)
@@ -119,7 +120,7 @@ namespace Client
 
                     line = Console.ReadLine();
                     line = line.Trim();
-                    line = TextFormatter(line);
+                    line = TextFormatter(line, clientDetails);
                     Console.CursorTop -= 1;
                 }
 
@@ -163,7 +164,7 @@ namespace Client
             return name;
         }
 
-        private static String TextFormatter(string message)
+        private static String TextFormatter(string message, ClientDetails details)
         {
             // i-1 = prim caracter
             // j   = al doilea
@@ -189,7 +190,7 @@ namespace Client
                     {
                         message = message.Remove(start - 1, message[start - 1].ToString().Length).Insert(start - 1, StyleConstants[index]);
                         j = j + 3;
-                        message = message.Remove(j, message[j].ToString().Length).Insert(j, StyleConstants[index]);
+                        message = message.Remove(j, message[j].ToString().Length).Insert(j, StyleConstants[2]);
                         break;
                     }
                     i++;
