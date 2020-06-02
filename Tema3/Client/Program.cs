@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Grpc.Core;
 using Grpc.Net.Client;
@@ -6,17 +8,39 @@ using Server;
 
 namespace Client
 {
-    static class Constants
-    {
-        public const char Bold = '*';
-        public const char Italic = '_';
-        public const char StrikeThrough = '~';
-        public const char Underlined = '#';
-    }
     class Program
     {
+        public static string[] SymbolConstants = new string[] { "*", "'"};
+        public static string[] StyleConstants = new string[] { "\x1B[1m", "\x1B[4m", "\x1B[0m" };
+
+        #region FormattingImpl
+
+        const int STD_OUTPUT_HANDLE = -11;
+        const uint ENABLE_VIRTUAL_TERMINAL_PROCESSING = 4;
+
+        [DllImport("kernel32.dll", SetLastError = true)]
+        static extern IntPtr GetStdHandle(int nStdHandle);
+
+        [DllImport("kernel32.dll")]
+        static extern bool GetConsoleMode(IntPtr hConsoleHandle, out uint lpMode);
+
+        [DllImport("kernel32.dll")]
+        static extern bool SetConsoleMode(IntPtr hConsoleHandle, uint dwMode);
+
+        #endregion
+
         static async Task Main(string[] args)
         {
+            #region FormattingInFunctionImpl
+
+            var handle = GetStdHandle(STD_OUTPUT_HANDLE);
+            uint mode;
+            GetConsoleMode(handle, out mode);
+            mode |= ENABLE_VIRTUAL_TERMINAL_PROCESSING;
+            SetConsoleMode(handle, mode);
+
+            #endregion
+
             // Face ca aplicatia sa mearga fara https ~Simone
             AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
 
@@ -55,7 +79,7 @@ namespace Client
                             Console.Write($"{streaming.ResponseStream.Current.ClientName}: ");
                         }
 
-                        Console.WriteLine($"{streaming.ResponseStream.Current.Message};");
+                        Console.WriteLine($"{streaming.ResponseStream.Current.Message}");
                         Console.ForegroundColor = Enum.Parse<ConsoleColor>(clientDetails.ColorInConsole);
                     }
                 });
@@ -138,32 +162,43 @@ namespace Client
             return name;
         }
 
-        private Boolean isTextFormatable(char predefinedCharacter, string message)
+        private static String TextFormatter(string message)
         {
-            bool firstApparence = false;
-            bool secondApparence = false;
-            int i, j;
-            for (i = 0; i < message.Length; i++)
+            // i-1 = prim caracter
+            // j   = al doilea
+
+            foreach(var predefinedCharacter in StyleConstants)
             {
-                if (message[i] == predefinedCharacter)
-                    firstApparence = true;
-                i++;
-                break;
-            }
-            while (i != message.Length)
-            {
-                j = i;
-                if (message[j] == predefinedCharacter)
+                bool firstApparence = false;
+                bool secondApparence = false;
+
+                int i, j;
+                for (i = 0; i < message.Length; i++)
                 {
-                    secondApparence = true;
+                    if (message[i].ToString() == predefinedCharacter)
+                        firstApparence = true;
+                    i++;
                     break;
                 }
-                i++;
+
+                while (i != message.Length)
+                {
+                    j = i;
+                    if (message[j].ToString() == predefinedCharacter)
+                    {
+                        secondApparence = true;
+                        break;
+                    }
+                    i++;
+                }
+
+                if (firstApparence == true && secondApparence == true)
+                {
+                    // To add replace function ~Simone
+                }
             }
-            if (firstApparence == true && secondApparence == true)
-                return true;
-            else
-                return false;
+
+            return message;
         }
     }
 }

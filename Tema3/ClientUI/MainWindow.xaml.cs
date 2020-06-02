@@ -9,28 +9,42 @@ namespace ClientUI
 {
     public partial class MainWindow : Window
     {
+        private bool m_isSending = false;
+        private string m_name = String.Empty;
+
         public MainWindow()
         {
             InitializeComponent();
+            
             StartClient();
+            txtChat.Text = "Enter your name:";
         }
 
-        static async Task StartClient()
+        private void btnSend_Click(object sender, RoutedEventArgs e)
+        {
+            m_isSending = true;
+        }
+
+        async Task StartClient()
         {
             // Face ca aplicatia sa mearga fara https ~Simone
             AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
 
             //var channel = GrpcChannel.ForAddress("http://arthareos.go.ro:8888");
             GrpcChannel channel = GrpcChannel.ForAddress("http://localhost:8888");
-            var client = new ChatServices.ChatServicesClient(channel);
+            ChatServices.ChatServicesClient client = new ChatServices.ChatServicesClient(channel);
 
-            String name = ReadClientName();
+            while (m_name.Equals(String.Empty) && !m_isSending)
+            {
+                m_name = txtChat.Text;
+            }
+            m_isSending = false;
 
             //Create client
             ClientDetails clientDetails = new ClientDetails
             {
                 Id = Guid.NewGuid().ToString(),
-                Name = name,
+                Name = m_name,
                 ColorInConsole = GetRandomChatColor()
             };
 
@@ -117,28 +131,6 @@ namespace ClientUI
             }
 
             return true;
-        }
-
-        public String ReadClientName()
-        {
-            txtChat.Text += "\n";
-            txtChat.Text += "Enter your name in the text box and send;";
-
-            
-            String name = Console.ReadLine();
-
-            while (IsStringEmpty(name))
-            {
-                Console.Clear();
-                Console.Write("Invalid name! Please enter a new one: ");
-                name = Console.ReadLine();
-            }
-
-            name = name.Trim();
-            Console.Clear();
-            Console.WriteLine($"Your name: {name};");
-
-            return name;
         }
     }
 }
