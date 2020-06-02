@@ -37,22 +37,27 @@ namespace Server.Services
             }
 
             m_chatRoomService.ConnectClientToChatRoom(Guid.Parse(requestStream.Current.ClientId), responseStream);
-
-            while (await requestStream.MoveNext())
+            try
             {
-                var chatMessage = requestStream.Current;
-
-                foreach (var client in m_chatRoomService.chatRoom.Clients)
+                while (await requestStream.MoveNext())
                 {
-                    if (string.Equals(requestStream.Current.Message, "qw!", StringComparison.OrdinalIgnoreCase))
-                    {
-                        Console.Write("[INFO] " + client.Name + " disconnected!\n");
-                        m_chatRoomService.DisconnectClient(Guid.Parse(auxRequest.Current.ClientId));
-                        break;
-                    }
+                    var chatMessage = requestStream.Current;
 
-                    await client.Stream.WriteAsync(chatMessage);
+                    foreach (var client in m_chatRoomService.chatRoom.Clients)
+                    {
+                        if (string.Equals(requestStream.Current.Message, "qw!", StringComparison.OrdinalIgnoreCase))
+                        {
+                            Console.Write("[INFO] " + client.Name + " disconnected!\n");
+                            m_chatRoomService.DisconnectClient(Guid.Parse(auxRequest.Current.ClientId));
+                            break;
+                        }
+
+                        await client.Stream.WriteAsync(chatMessage);
+                    }
                 }
+            }
+            catch(Exception e )
+            { 
             }
         }
     }

@@ -10,7 +10,7 @@ namespace Client
 {
     class Program
     {
-        public static string[] SymbolConstants = new string[] { "*", "'"};
+        public static string[] SymbolConstants = new string[] { "*", "'" };
         public static string[] StyleConstants = new string[] { "\x1B[1m", "\x1B[4m", "\x1B[0m" };
 
         #region FormattingImpl
@@ -119,6 +119,7 @@ namespace Client
 
                     line = Console.ReadLine();
                     line = line.Trim();
+                    line = TextFormatter(line);
                     Console.CursorTop -= 1;
                 }
 
@@ -166,7 +167,7 @@ namespace Client
         {
             // i-1 = prim caracter
             // j   = al doilea
-
+            int start = 0;
             for (int index = 0; index < SymbolConstants.Length; index++)
             {
                 bool firstApparence = false;
@@ -174,20 +175,21 @@ namespace Client
                 int i, j;
                 for (i = 0; i < message.Length; i++)
                 {
-                    if (message[i].ToString() == SymbolConstants[index])
+                    if (message[i].ToString().Equals(SymbolConstants[index]))
                         firstApparence = true;
                     i++;
+                    start = i;
                     break;
                 }
 
                 while (i != message.Length)
                 {
                     j = i;
-                    if (message[j].ToString() == SymbolConstants[index] && firstApparence)
+                    if (message[j].ToString().Equals(SymbolConstants[index]) && firstApparence)
                     {
-                        message[i - 1].ToString().Replace(message[i - 1], Char.Parse(StyleConstants[index]));
-                        message[i - 1].ToString().Replace(message[j], Char.Parse(StyleConstants[2]));
-
+                        message = message.Remove(start - 1, message[start - 1].ToString().Length).Insert(start - 1, StyleConstants[index]);
+                        j = j + 3;
+                        message = message.Remove(j, message[j].ToString().Length).Insert(j, StyleConstants[index]);
                         break;
                     }
                     i++;
