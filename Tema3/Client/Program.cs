@@ -79,7 +79,13 @@ namespace Client
                             Console.Write($"{streaming.ResponseStream.Current.ClientName}: ");
                         }
 
-                        Console.WriteLine($"{streaming.ResponseStream.Current.Message}");
+                        foreach(var v in streaming.ResponseStream.Current.Message.Split())
+                        {
+                            Console.ForegroundColor = Enum.Parse<ConsoleColor>(streaming.ResponseStream.Current.Color);
+                            Console.Write(v + " ");
+                        }
+
+                        Console.WriteLine("");
                         Console.ForegroundColor = Enum.Parse<ConsoleColor>(clientDetails.ColorInConsole);
                     }
                 });
