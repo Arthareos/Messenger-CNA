@@ -6,8 +6,8 @@ namespace Server.Models
     public class Client
     {
         private Guid m_ID;
-        private String m_name;
-        private String m_color;
+        private string m_name;
+        private string m_color;
         public IAsyncStreamWriter<ChatMessage> m_stream;
        
         public Client()

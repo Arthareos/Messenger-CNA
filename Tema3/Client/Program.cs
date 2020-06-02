@@ -48,7 +48,7 @@ namespace Client
             GrpcChannel channel = GrpcChannel.ForAddress("http://localhost:8888");
             ChatServices.ChatServicesClient client = new ChatServices.ChatServicesClient(channel);
 
-            String name = ReadClientName();
+            string name = ReadClientName();
 
             //Create client
             ClientDetails clientDetails = new ClientDetails
@@ -99,7 +99,7 @@ namespace Client
                 });
 
                 Console.ForegroundColor = Enum.Parse<ConsoleColor>(clientDetails.ColorInConsole);
-                String line = Console.ReadLine();
+                string line = Console.ReadLine();
                 Console.CursorTop -= 1;
                 line = TextFormatter(line, clientDetails);
 
@@ -154,7 +154,7 @@ namespace Client
         private static String ReadClientName()
         {
             Console.Write("Enter your name: ");
-            String name = Console.ReadLine();
+            string name = Console.ReadLine();
 
             while (IsStringEmpty(name))
             {
