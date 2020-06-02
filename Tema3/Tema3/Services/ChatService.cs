@@ -19,6 +19,7 @@ namespace Server.Services
         public override Task<JoinClientReply> JoinClientChat(JoinClientRequest request, ServerCallContext context)
         {
             m_chatRoomService.AddClientToChatRoomAsync(request.ClientDetails);
+            Console.Write("[INFO] " + request.ClientDetails.Name + " is connected!\n");
             return Task.FromResult(new JoinClientReply { });
         }
 
@@ -29,11 +30,6 @@ namespace Server.Services
             if (!await requestStream.MoveNext())
             {
                 return;
-            }
-            
-            foreach(var client in m_chatRoomService.chatRoom.Clients)
-            {
-                Console.Write("[INFO] " + client.Name + " is connected!\n");
             }
 
             m_chatRoomService.ConnectClientToChatRoom(Guid.Parse(requestStream.Current.ClientId), responseStream);
