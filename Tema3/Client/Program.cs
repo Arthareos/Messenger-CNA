@@ -167,15 +167,14 @@ namespace Client
             // i-1 = prim caracter
             // j   = al doilea
 
-            foreach(var predefinedCharacter in StyleConstants)
+            for (int index = 0; index < SymbolConstants.Length; index++)
             {
                 bool firstApparence = false;
-                bool secondApparence = false;
 
                 int i, j;
                 for (i = 0; i < message.Length; i++)
                 {
-                    if (message[i].ToString() == predefinedCharacter)
+                    if (message[i].ToString() == SymbolConstants[index])
                         firstApparence = true;
                     i++;
                     break;
@@ -184,17 +183,14 @@ namespace Client
                 while (i != message.Length)
                 {
                     j = i;
-                    if (message[j].ToString() == predefinedCharacter)
+                    if (message[j].ToString() == SymbolConstants[index] && firstApparence)
                     {
-                        secondApparence = true;
+                        message[i - 1].ToString().Replace(message[i - 1], Char.Parse(StyleConstants[index]));
+                        message[i - 1].ToString().Replace(message[j], Char.Parse(StyleConstants[2]));
+
                         break;
                     }
                     i++;
-                }
-
-                if (firstApparence == true && secondApparence == true)
-                {
-                    // To add replace function ~Simone
                 }
             }
 
